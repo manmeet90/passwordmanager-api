@@ -1,5 +1,21 @@
 const {firebaseClient} = require('../firebaseClient');
 class PasswordController {
+    getAppConfigs() {
+        return new Promise((resolve, reject) => {
+            if(!firebaseClient.isLoggedIn) {
+                reject('please login to perform this operation');
+            } else {
+                firebaseClient.getAppConfigs()
+                .then(snapshot => {
+                    resolve(snapshot.val());
+                })
+                .catch(err => {
+                    reject(err.message)
+                });
+            }
+        });
+    }
+
     getAllPasswords() {
         return new Promise((resolve, reject) => {
             if(!firebaseClient.isLoggedIn) {

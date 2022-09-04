@@ -44,6 +44,11 @@ class FirebaseClient {
         return get(child(dbRef, `passwords`));
     }
 
+    getAppConfigs() {
+        const dbRef = ref(getDatabase());
+        return get(child(dbRef, `configs`));
+    }
+
     addUpdatePassword(id, title, password) {
         const db = getDatabase();
         return set(ref(db, 'passwords/' + id), {

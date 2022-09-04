@@ -15,6 +15,16 @@ passwordRouter.get('/',(req,res) => {
     });
 });
 
+passwordRouter.get('/configs',(req,res) => {
+    passwordController.getAppConfigs()
+    .then((data) => {
+        res.json(utils.prepareSuccessResponse(data));
+    }, err => {
+        res.status(500);
+        res.json(utils.prepareErrorResponse(err));
+    });
+});
+
 passwordRouter.post('/',(req,res) => {
     passwordController.addUpdatePassword(req.body.id, req.body.title, req.body.password)
     .then((data) => {
